@@ -8,6 +8,7 @@ namespace MyFitnessApp.Services;
 
 public class GeolocationService
 {
+    public event EventHandler<Location>? LocationChangedEvent;
     private CancellationTokenSource? _cancelTokenSource;
     private bool _isCheckingLocation;
 
@@ -82,6 +83,7 @@ public class GeolocationService
     {
         var location = e.Location;
         Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+        LocationChangedEvent?.Invoke(this, location);
     }
 
     public void StopListening()
