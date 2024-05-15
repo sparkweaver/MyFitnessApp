@@ -1,25 +1,36 @@
-﻿namespace MyFitnessApp
+﻿using MyFitnessApp.Services;
+
+namespace MyFitnessApp
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
+        private GeolocationService _geolocationService;
 
         public MainPage()
         {
             InitializeComponent();
+            _geolocationService = new GeolocationService();
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        private void StartButton_Clicked(object sender, EventArgs e)
         {
-            count++;
+            _geolocationService.StartListening();
+        }
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+        private void StopButton_Clicked(object sender, EventArgs e)
+        {
+            _geolocationService.StopListening();
+        }
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+        private async void ShowCachedLocationButton_Clicked(object sender, EventArgs e)
+        {
+            var location = await _geolocationService.GetCachedLocation();
+            await DisplayAlert("Cached Location", location, "OK");
+        }
+
+        private async void ShowCurrentLocationButton_Clicked(object sender, EventArgs e)
+        {
+            await _geolocationService.GetCurrentLocation();
         }
     }
-
 }

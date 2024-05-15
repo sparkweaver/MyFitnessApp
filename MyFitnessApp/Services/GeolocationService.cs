@@ -1,5 +1,4 @@
-﻿using Android.Locations;
-using Microsoft.Maui.Devices.Sensors;
+﻿using Microsoft.Maui.Devices.Sensors;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -60,7 +59,7 @@ public class GeolocationService
             _cancelTokenSource.Cancel();
     }
 
-    async void OnStartListening()
+    public async void StartListening()
     {
         try
         {
@@ -79,13 +78,13 @@ public class GeolocationService
         }
     }
 
-    void Geolocation_LocationChanged(object sender, GeolocationLocationChangedEventArgs e)
+    private void Geolocation_LocationChanged(object sender, GeolocationLocationChangedEventArgs e)
     {
         var location = e.Location;
         Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
     }
 
-    void OnStopListening()
+    public void StopListening()
     {
         try
         {
@@ -96,7 +95,6 @@ public class GeolocationService
         }
         catch (Exception ex)
         {
-            // Unable to stop listening for location changes
             Console.WriteLine($"Error: {ex.Message}");
         }
     }
