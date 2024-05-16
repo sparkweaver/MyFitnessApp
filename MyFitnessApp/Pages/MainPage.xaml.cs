@@ -10,8 +10,8 @@ namespace MyFitnessApp
         public MainPage()
         {
             InitializeComponent();
-            _geolocationService = new GeolocationService();
             _distanceCalculator = new DistanceCalculator();
+            _geolocationService = new GeolocationService();
             _geolocationService.LocationChangedEvent += OnLocationChanged;
         }
 
@@ -24,12 +24,6 @@ namespace MyFitnessApp
         private void StopButton_Clicked(object sender, EventArgs e)
         {
             _geolocationService.StopListening();
-        }
-
-        private async void ShowCachedLocationButton_Clicked(object sender, EventArgs e)
-        {
-            var location = await _geolocationService.GetCachedLocation();
-            await DisplayAlert("Cached Location", location, "OK");
         }
 
         private async void ShowCurrentLocationButton_Clicked(object sender, EventArgs e)

@@ -28,15 +28,11 @@
             <Button Text="Start Listening"
                     SemanticProperties.Hint="start to listen for change in location"
                     Clicked="StartButton_Clicked"/>
-            
+
             <Button Text="Stop Listening" 
                     SemanticProperties.Hint="stop listening for changes in location"
                     Clicked="StopButton_Clicked"/>
-            
-            <Button Text="Show Cached Location"
-                    SemanticProperties.Hint="show cached location for the device"
-                    Clicked="ShowCachedLocationButton_Clicked"/>
-            
+
             <Button Text="Show Current Location" 
                     SemanticProperties.Hint="show the current location for the device"
                     Clicked="ShowCurrentLocationButton_Clicked"/>

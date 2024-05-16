@@ -1,45 +1,24 @@
-﻿using Microsoft.Maui.Devices.Sensors;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Location = Microsoft.Maui.Devices.Sensors.Location;
+﻿using Location = Microsoft.Maui.Devices.Sensors.Location;
 
 namespace MyFitnessApp.Services;
 
 public class GeolocationService
 {
     public event EventHandler<Location>? LocationChangedEvent;
-    private CancellationTokenSource? _cancelTokenSource;
-    private bool _isCheckingLocation;
+    private CancellationTokenSource? cancelTokenSource;
+    private bool isCheckingLocation;
 
-    public async Task<string> GetCachedLocation()
-    {
-        try
-        {
-            Location location = await Geolocation.Default.GetLastKnownLocationAsync();
-
-            if (location != null)
-                return $"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}";
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-        }
-
-        return "None";
-    }
-
+    // Section 1: Manual Location Request
     public async Task GetCurrentLocation()
     {
         try
         {
-            _isCheckingLocation = true;
+            isCheckingLocation = true;
 
-            GeolocationRequest request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
+            GeolocationRequest request = new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(10));
+            cancelTokenSource = new CancellationTokenSource();
 
-            _cancelTokenSource = new CancellationTokenSource();
-
-            Location location = await Geolocation.Default.GetLocationAsync(request, _cancelTokenSource.Token);
+            Location? location = await Geolocation.Default.GetLocationAsync(request, cancelTokenSource.Token);
 
             if (location != null)
                 Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
@@ -50,22 +29,25 @@ public class GeolocationService
         }
         finally
         {
-            _isCheckingLocation = false;
+            isCheckingLocation = false;
         }
     }
 
     public void CancelRequest()
     {
-        if (_isCheckingLocation && _cancelTokenSource != null && _cancelTokenSource.IsCancellationRequested == false)
-            _cancelTokenSource.Cancel();
+        if (isCheckingLocation && cancelTokenSource != null && cancelTokenSource.IsCancellationRequested == false)
+        {
+            cancelTokenSource.Cancel();
+        }
     }
 
+    // Section 2: Event-based Location Updates
     public async void StartListening()
     {
         try
         {
             Geolocation.LocationChanged += Geolocation_LocationChanged;
-            var request = new GeolocationListeningRequest(GeolocationAccuracy.Best);
+            var request = new GeolocationListeningRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(3));
             var success = await Geolocation.StartListeningForegroundAsync(request);
 
             string status = success
@@ -77,13 +59,6 @@ public class GeolocationService
         {
             Console.WriteLine($"Error: {ex.Message}");
         }
-    }
-
-    private void Geolocation_LocationChanged(object sender, GeolocationLocationChangedEventArgs e)
-    {
-        var location = e.Location;
-        Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
-        LocationChangedEvent?.Invoke(this, location);
     }
 
     public void StopListening()
@@ -99,5 +74,12 @@ public class GeolocationService
         {
             Console.WriteLine($"Error: {ex.Message}");
         }
+    }
+
+    private void Geolocation_LocationChanged(object sender, GeolocationLocationChangedEventArgs e)
+    {
+        var location = e.Location;
+        Console.WriteLine($"Location changed: Latitude {location.Latitude}, Longitude {location.Longitude}");
+        LocationChangedEvent?.Invoke(this, location);
     }
 }
