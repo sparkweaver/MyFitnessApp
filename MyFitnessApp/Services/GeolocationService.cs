@@ -9,28 +9,25 @@ public class GeolocationService
     private bool isCheckingLocation;
 
     // Section 1: Manual Location Request
-    public async Task GetCurrentLocation()
+    public async Task<Location?> GetCurrentLocation()
     {
         try
         {
             isCheckingLocation = true;
 
-            GeolocationRequest request = new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(10));
+            GeolocationRequest request = new (GeolocationAccuracy.Best, TimeSpan.FromSeconds(10));
             cancelTokenSource = new CancellationTokenSource();
 
             Location? location = await Geolocation.Default.GetLocationAsync(request, cancelTokenSource.Token);
+            isCheckingLocation = false;
 
-            if (location != null)
-                Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+            return location;
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error: {ex.Message}");
         }
-        finally
-        {
-            isCheckingLocation = false;
-        }
+        return null;
     }
 
     public void CancelRequest()
@@ -46,10 +43,12 @@ public class GeolocationService
     {
         try
         {
+            StopListening();
             Geolocation.LocationChanged += Geolocation_LocationChanged;
-            var request = new GeolocationListeningRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(3));
+            GeolocationListeningRequest request = new (GeolocationAccuracy.Best, TimeSpan.FromSeconds(3));
             var success = await Geolocation.StartListeningForegroundAsync(request);
 
+            //TODO Remove
             string status = success
                 ? "Started listening for foreground location updates"
                 : "Couldn't start listening";
@@ -67,6 +66,8 @@ public class GeolocationService
         {
             Geolocation.LocationChanged -= Geolocation_LocationChanged;
             Geolocation.StopListeningForeground();
+            
+            //TODO Remove
             string status = "Stopped listening for foreground location updates";
             Console.WriteLine(status);
         }
@@ -76,8 +77,9 @@ public class GeolocationService
         }
     }
 
-    private void Geolocation_LocationChanged(object sender, GeolocationLocationChangedEventArgs e)
+    private void Geolocation_LocationChanged(object? sender, GeolocationLocationChangedEventArgs? e)
     {
+        //TODO remove
         var location = e.Location;
         Console.WriteLine($"Location changed: Latitude {location.Latitude}, Longitude {location.Longitude}");
         LocationChangedEvent?.Invoke(this, location);

@@ -1,5 +1,4 @@
-﻿
-namespace MyFitnessApp.Services;
+﻿namespace MyFitnessApp.Services;
 
 public class DistanceCalculator
 {
@@ -11,7 +10,7 @@ public class DistanceCalculator
         Reset();
     }
 
-    public void UpdateTotalDistance(Location location)
+    public void UpdateTotalDistance(Location? location)
     {
         if (lastLocation != null)
         {

@@ -2,12 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyFitnessApp.MainPage"
+             xmlns:viewmodel="clr-namespace:MyFitnessApp.ViewModels"
+             x:DataType="viewmodel:MainViewModel"
              Title="">
 
     <ScrollView>
         <VerticalStackLayout
             Padding="30,20"
             Spacing="25">
+            
             <Image
                 Source="myfitness.png"
                 HeightRequest="300"
@@ -22,26 +25,7 @@
             <Button Text="Walking"
                     SemanticProperties.Hint="Navigate to the walking page"
                     Command="{Binding NavigateCommand}"/>
-
-
-            <Label
-                Text="Select Activity"
-                Style="{StaticResource SubHeadline}"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="select what activity you want to do" />
-
-            <Button Text="Start Listening"
-                    SemanticProperties.Hint="start to listen for change in location"
-                    Clicked="StartButton_Clicked"/>
-
-            <Button Text="Stop Listening" 
-                    SemanticProperties.Hint="stop listening for changes in location"
-                    Clicked="StopButton_Clicked"/>
-
-            <Button Text="Show Current Location" 
-                    SemanticProperties.Hint="show the current location for the device"
-                    Clicked="ShowCurrentLocationButton_Clicked"/>
-
+            
         </VerticalStackLayout>
     </ScrollView>
 
