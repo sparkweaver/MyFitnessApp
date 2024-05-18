@@ -19,6 +19,11 @@
                 Style="{StaticResource Headline}"
                 SemanticProperties.HeadingLevel="Level1" />
 
+            <Button Text="Walking"
+                    SemanticProperties.Hint="Navigate to the walking page"
+                    Command="{Binding NavigateCommand}"/>
+
+
             <Label
                 Text="Select Activity"
                 Style="{StaticResource SubHeadline}"

@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using MyFitnessApp.Pages;
+using MyFitnessApp.ViewModels;
 
 namespace MyFitnessApp
 {
@@ -14,6 +16,12 @@ namespace MyFitnessApp
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
+            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddSingleton<MainViewModel>();
+
+            builder.Services.AddTransient<DistancePage>();
+            builder.Services.AddTransient<DistanceViewModel>();
 
 #if DEBUG
     		builder.Logging.AddDebug();
