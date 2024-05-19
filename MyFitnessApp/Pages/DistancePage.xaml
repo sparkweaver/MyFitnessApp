@@ -15,14 +15,26 @@
     
     <VerticalStackLayout HorizontalOptions="Center"
                          VerticalOptions="Center"
-                         Spacing="10">
-        
-        <Label Text="{Binding Distance}"
-               BackgroundColor="red"
+                         Spacing="20">
+
+        <Label Text="Press start and get moving!"
+               TextColor="Gray"
+               FontAttributes="Italic"
+               FontSize="27"
+               HeightRequest="100"
+               WidthRequest="350"
+               VerticalTextAlignment="Center"
                HorizontalTextAlignment="Center"
+               IsVisible="{Binding AtStart}"/>
+
+        <Label Text="{Binding Distance}"
                FontSize="75"
-               Margin="0,20"
-               SemanticProperties.Description="The total distance traveled."/>
+               HeightRequest="100"
+               WidthRequest="350"
+               VerticalTextAlignment="Center"
+               HorizontalTextAlignment="Center"
+               SemanticProperties.Description="The total distance traveled."
+               IsVisible="{Binding AtStart, Converter={StaticResource InverseBooleanConverter}}"/>
 
         <Button Text="Start"
                 SemanticProperties.Hint="start to listen for change in location."

@@ -11,6 +11,9 @@ public partial class DistanceViewModel : ObservableObject
     private readonly DistanceCalculator distanceCalculator;
 
     [ObservableProperty]
+    bool atStart;
+
+    [ObservableProperty]
     bool isRunning;
 
     [ObservableProperty]
@@ -20,6 +23,7 @@ public partial class DistanceViewModel : ObservableObject
         distanceCalculator = new DistanceCalculator();
         geolocationService = new GeolocationService();
         geolocationService.LocationChangedEvent += OnLocationChanged;
+        AtStart = true;
         IsRunning = false;
         Distance = "";
     }
@@ -27,7 +31,19 @@ public partial class DistanceViewModel : ObservableObject
     private void UpdateDistance(Location? locaiton)
     {
         distanceCalculator.UpdateTotalDistance(locaiton);
-        Distance = distanceCalculator.GetTotalDistance().ToString();
+
+        double kilometers = distanceCalculator.GetTotalDistance();
+        double roundedKilometers = Math.Round(kilometers, 2);
+
+        if(kilometers < 1)
+        {
+            int meters = (int)Math.Round(kilometers * 1000);
+            Distance = $"{meters} m";
+        }
+        else
+        {
+            Distance = $"{roundedKilometers} km";
+        }
     }
 
     private void OnLocationChanged(object? sender, Location? locaiton)
@@ -55,6 +71,11 @@ public partial class DistanceViewModel : ObservableObject
         await EdgeSessionLocation();
         geolocationService.StartListening();
         IsRunning = true;
+
+        if (AtStart)
+        {
+            AtStart = false;
+        }
     }
 
     [RelayCommand]
