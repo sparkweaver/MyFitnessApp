@@ -5,7 +5,7 @@
              xmlns:viewmodel="clr-namespace:MyFitnessApp.ViewModels"
              x:DataType="viewmodel:DistanceViewModel"
              Title="">
-    
+
     <ScrollView>
         <VerticalStackLayout Padding="30,20"
                              Spacing="25">
@@ -15,14 +15,13 @@
                    SemanticProperties.Description="The total distance traveled."/>
 
             <Button Text="Start Listening"
-                    SemanticProperties.Hint="start to listen for change in location"
+                    SemanticProperties.Hint="start to listen for change in location."
                     Command="{Binding StartCommand}"/>
 
             <Button Text="Stop Listening" 
-                    SemanticProperties.Hint="stop listening for changes in location"
+                    SemanticProperties.Hint="stop listening for changes in location."
                     Command="{Binding StopCommand}"/>
 
         </VerticalStackLayout>
     </ScrollView>
-   
 </ContentPage>

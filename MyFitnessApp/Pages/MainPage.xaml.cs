@@ -1,6 +1,6 @@
 ﻿using MyFitnessApp.ViewModels;
 
-namespace MyFitnessApp;
+namespace MyFitnessApp.Pages;
 
 public partial class MainPage : ContentPage
 {

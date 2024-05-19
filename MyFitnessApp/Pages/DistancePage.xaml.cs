@@ -1,4 +1,3 @@
-using MyFitnessApp.Services;
 using MyFitnessApp.ViewModels;
 
 namespace MyFitnessApp.Pages;
