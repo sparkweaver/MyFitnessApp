@@ -3,25 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyFitnessApp.Pages.DistancePage"
              xmlns:viewmodel="clr-namespace:MyFitnessApp.ViewModels"
+             xmlns:utilities="clr-namespace:MyFitnessApp.Utilities"
              x:DataType="viewmodel:DistanceViewModel"
              Title="">
 
-
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <utilities:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <VerticalStackLayout HorizontalOptions="Center"
                          VerticalOptions="Center"
                          Spacing="10">
-
+        
         <Label Text="{Binding Distance}"
-                FontSize="30"
-                SemanticProperties.Description="The total distance traveled."/>
+               BackgroundColor="red"
+               HorizontalTextAlignment="Center"
+               FontSize="75"
+               Margin="0,20"
+               SemanticProperties.Description="The total distance traveled."/>
 
-        <Button Text="Start Listening"
+        <Button Text="Start"
                 SemanticProperties.Hint="start to listen for change in location."
-                Command="{Binding StartCommand}"/>
+                Command="{Binding StartCommand}"
+                IsVisible="{Binding IsRunning, Converter={StaticResource InverseBooleanConverter}}"/>
 
-        <Button Text="Stop Listening" 
+        <Button Text="Stop" 
                 SemanticProperties.Hint="stop listening for changes in location."
-                Command="{Binding StopCommand}"/>
+                Command="{Binding StopCommand}"
+                IsVisible="{Binding IsRunning}"/>
 
     </VerticalStackLayout>
 

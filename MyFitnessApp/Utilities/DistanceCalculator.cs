@@ -1,11 +1,11 @@
-﻿namespace MyFitnessApp.Services;
+﻿namespace MyFitnessApp.Utilities;
 
 public class DistanceCalculator
 {
     private Location? lastLocation;
     private double totalDistance;
 
-    public DistanceCalculator() 
+    public DistanceCalculator()
     {
         Reset();
     }
@@ -17,15 +17,15 @@ public class DistanceCalculator
             double distance = Location.CalculateDistance(lastLocation, location, DistanceUnits.Kilometers);
             totalDistance += distance;
         }
-        
+
         lastLocation = location;
     }
 
-    public double GetTotalDistance() 
+    public double GetTotalDistance()
     {
-        return totalDistance; 
+        return totalDistance;
     }
-    
+
     public void Reset()
     {
         lastLocation = null;
