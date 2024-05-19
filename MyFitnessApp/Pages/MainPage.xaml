@@ -6,24 +6,26 @@
              x:DataType="viewmodel:MainViewModel"
              Title="">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="30,20"
-                             Spacing="25">
-            
+
+    <VerticalStackLayout HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         Spacing="10">
+
+        <Grid WidthRequest="300">
             <Image Source="myfitness.png"
-                   HeightRequest="300"
+                   HorizontalOptions="Fill"
                    Aspect="AspectFit"
-                   SemanticProperties.Description="running human with a dumbell" />
+                   SemanticProperties.Description="running human with a dumbell"/>
+        </Grid>
 
-            <Label Text="MyFitness"
-                   Style="{StaticResource Headline}"
-                   SemanticProperties.HeadingLevel="Level1" />
+        <Label Text="MyFitness"
+               Style="{StaticResource Headline}"
+               SemanticProperties.HeadingLevel="Level1"/>
 
-            <Button Text="Walking"
-                    SemanticProperties.Hint="Navigate to the walking page"
-                    Command="{Binding NavigateCommand}"/>
-            
-        </VerticalStackLayout>
-    </ScrollView>
+        <Button Text="Walking"
+                SemanticProperties.Hint="Navigate to the walking page"
+                Command="{Binding NavigateCommand}"/>
+
+    </VerticalStackLayout>
 
 </ContentPage>

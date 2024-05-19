@@ -6,22 +6,23 @@
              x:DataType="viewmodel:DistanceViewModel"
              Title="">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="30,20"
-                             Spacing="25">
 
-            <Label Text="{Binding Distance}"
-                   FontSize="30"
-                   SemanticProperties.Description="The total distance traveled."/>
+    <VerticalStackLayout HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         Spacing="10">
 
-            <Button Text="Start Listening"
-                    SemanticProperties.Hint="start to listen for change in location."
-                    Command="{Binding StartCommand}"/>
+        <Label Text="{Binding Distance}"
+                FontSize="30"
+                SemanticProperties.Description="The total distance traveled."/>
 
-            <Button Text="Stop Listening" 
-                    SemanticProperties.Hint="stop listening for changes in location."
-                    Command="{Binding StopCommand}"/>
+        <Button Text="Start Listening"
+                SemanticProperties.Hint="start to listen for change in location."
+                Command="{Binding StartCommand}"/>
 
-        </VerticalStackLayout>
-    </ScrollView>
+        <Button Text="Stop Listening" 
+                SemanticProperties.Hint="stop listening for changes in location."
+                Command="{Binding StopCommand}"/>
+
+    </VerticalStackLayout>
+
 </ContentPage>
