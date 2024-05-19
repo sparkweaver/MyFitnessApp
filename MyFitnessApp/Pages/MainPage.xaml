@@ -12,7 +12,7 @@
                          Spacing="10">
 
         <Grid WidthRequest="300">
-            <Image Source="myfitness.png"
+            <Image Source="runner.png"
                    HorizontalOptions="Fill"
                    Aspect="AspectFit"
                    SemanticProperties.Description="Image of a human figure running, symbolizing activity and fitness."/>
