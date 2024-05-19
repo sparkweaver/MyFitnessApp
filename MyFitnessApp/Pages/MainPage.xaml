@@ -15,7 +15,7 @@
             <Image Source="myfitness.png"
                    HorizontalOptions="Fill"
                    Aspect="AspectFit"
-                   SemanticProperties.Description="running human with a dumbell"/>
+                   SemanticProperties.Description="Image of a human figure running, symbolizing activity and fitness."/>
         </Grid>
 
         <Label Text="MyFitness"
@@ -23,8 +23,8 @@
                SemanticProperties.HeadingLevel="Level1"/>
 
         <Button Text="Walking"
-                SemanticProperties.Hint="Navigate to the walking page"
-                Command="{Binding NavigateCommand}"/>
+                SemanticProperties.Hint="Opens the walking activity page where you can track your walking workouts."
+                Command="{Binding OpenDistancePageCommand}"/>
 
     </VerticalStackLayout>
 

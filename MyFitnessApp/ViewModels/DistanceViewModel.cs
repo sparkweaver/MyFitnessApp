@@ -25,7 +25,7 @@ public partial class DistanceViewModel : ObservableObject
         geolocationService.LocationChangedEvent += OnLocationChanged;
         AtStart = true;
         IsRunning = false;
-        Distance = "";
+        Distance = string.Empty;
     }
 
     private void UpdateDistance(Location? locaiton)

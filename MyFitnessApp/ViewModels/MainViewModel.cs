@@ -7,7 +7,7 @@ namespace MyFitnessApp.ViewModels;
 public partial class MainViewModel : ObservableObject
 {
     [RelayCommand]
-    async Task Navigate()
+    async Task OpenDistancePage()
     {
         await Shell.Current.GoToAsync(nameof(DistancePage));
     }

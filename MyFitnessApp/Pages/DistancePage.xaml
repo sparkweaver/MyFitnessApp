@@ -33,16 +33,16 @@
                WidthRequest="350"
                VerticalTextAlignment="Center"
                HorizontalTextAlignment="Center"
-               SemanticProperties.Description="The total distance traveled."
+               SemanticProperties.Hint="Displays the distance you have traveled, updated in real-time during your session."
                IsVisible="{Binding AtStart, Converter={StaticResource InverseBooleanConverter}}"/>
 
         <Button Text="Start"
-                SemanticProperties.Hint="start to listen for change in location."
+                SemanticProperties.Hint="Start tracking your movement."
                 Command="{Binding StartCommand}"
                 IsVisible="{Binding IsRunning, Converter={StaticResource InverseBooleanConverter}}"/>
 
         <Button Text="Stop" 
-                SemanticProperties.Hint="stop listening for changes in location."
+                SemanticProperties.Hint="Stop tracking your movement."
                 Command="{Binding StopCommand}"
                 IsVisible="{Binding IsRunning}"/>
 
