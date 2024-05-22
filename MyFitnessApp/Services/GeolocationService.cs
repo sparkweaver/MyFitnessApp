@@ -6,19 +6,22 @@ public class GeolocationService
 {
     public event EventHandler<Location>? LocationChangedEvent;
     private CancellationTokenSource? cancelTokenSource;
-    private readonly SemaphoreSlim semaphore = new (1, 1);
+    private bool isChecking;
     private bool isListening;
 
     // Section 1: Manual Location Request
     public async Task<Location?> GetCurrentLocation()
     {
-        await semaphore.WaitAsync();
         try
         {
-            GeolocationRequest request = new (GeolocationAccuracy.Best, TimeSpan.FromSeconds(10));
+            isChecking = true;
+            
+            GeolocationRequest request = new (GeolocationAccuracy.Best, TimeSpan.FromSeconds(5));
+            
             cancelTokenSource = new CancellationTokenSource();
 
             Location? location = await Geolocation.Default.GetLocationAsync(request, cancelTokenSource.Token);
+            
             return location;
         }
         catch (Exception ex)
@@ -27,30 +30,23 @@ public class GeolocationService
         }
         finally
         {
-            semaphore.Release();
+            isChecking = false;
         }
         
         return null;
     }
 
-    // TODO for future lifecycle
-    public async Task StopAll()
-    {
-        if (cancelTokenSource != null && cancelTokenSource.IsCancellationRequested == false)
+    public void CancelRequest() 
+    { 
+        if (isChecking && cancelTokenSource != null && cancelTokenSource.IsCancellationRequested == false)
         {
             cancelTokenSource.Cancel();
-        }
-
-        if (isListening)
-        {
-            await StopListening();
-        }
+        } 
     }
 
     // Section 2: Event-based Location Updates
     public async Task StartListening()
     {
-        await semaphore.WaitAsync();
         try
         {
             if (isListening)
@@ -58,28 +54,26 @@ public class GeolocationService
                 return;
             }
 
+            isListening = true;
+
             Geolocation.LocationChanged += GeolocationLocationChanged;
-            GeolocationListeningRequest request = new(GeolocationAccuracy.Best, TimeSpan.FromSeconds(10));
+            GeolocationListeningRequest request = new(GeolocationAccuracy.Best);
             var success = await Geolocation.StartListeningForegroundAsync(request);
 
-            if (success)
+            if (!success)
             {
-                isListening = true;
+                isListening = false;
             }
         }
         catch (Exception ex)
         {
+            isListening = false;
             Console.WriteLine($"Error: {ex.Message}");
-        }
-        finally
-        {
-            semaphore.Release();
         }
     }
 
-    public async Task StopListening()
+    public void StopListening()
     {
-        await semaphore.WaitAsync();
         try
         {
             if (!isListening)
@@ -95,18 +89,14 @@ public class GeolocationService
         catch (Exception ex)
         {
             Console.WriteLine($"Error: {ex.Message}");
-        } 
-        finally
-        {
-            semaphore.Release();
         }
     }
 
-    private void GeolocationLocationChanged(object? sender, GeolocationLocationChangedEventArgs? e)
+    private void GeolocationLocationChanged(object? sender, GeolocationLocationChangedEventArgs? ev)
     {
-        if (e != null)
+        if (ev != null)
         {
-            LocationChangedEvent?.Invoke(this, e.Location);
+            LocationChangedEvent?.Invoke(this, ev.Location);
         }
     }
 }

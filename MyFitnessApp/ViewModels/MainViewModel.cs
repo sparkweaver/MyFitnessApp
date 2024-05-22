@@ -9,6 +9,13 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     async Task OpenDistancePage()
     {
-        await Shell.Current.GoToAsync(nameof(DistancePage));
+        try 
+        {
+            await Shell.Current.GoToAsync(nameof(DistancePage));
+        } 
+        catch (Exception ex) 
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
     }
 }

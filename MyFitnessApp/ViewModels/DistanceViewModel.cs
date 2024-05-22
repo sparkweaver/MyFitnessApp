@@ -35,9 +35,9 @@ public partial class DistanceViewModel : ObservableObject
         double kilometers = distanceCalculator.GetTotalDistance();
         double roundedKilometers = Math.Round(kilometers, 2);
 
-        if(kilometers < 1)
+        if(kilometers <= 1)
         {
-            int meters = (int)Math.Round(kilometers * 1000);
+            int meters = (int)(kilometers * 1000);
             Distance = $"{meters} m";
         }
         else
@@ -51,7 +51,7 @@ public partial class DistanceViewModel : ObservableObject
         UpdateDistance(locaiton);
     }
 
-    async private Task EdgeSessionLocation()
+    private async Task EdgeSessionLocation()
     {
         try
         {
@@ -67,22 +67,36 @@ public partial class DistanceViewModel : ObservableObject
     [RelayCommand]
     async Task Start()
     {
-        distanceCalculator.Reset();
-        await EdgeSessionLocation();
-        geolocationService.StartListening();
-        IsRunning = true;
-
-        if (AtStart)
+        try
         {
-            AtStart = false;
+            distanceCalculator.Reset();
+            await EdgeSessionLocation();
+            await geolocationService.StartListening();
+            IsRunning = true;
+
+            if (AtStart)
+            {
+                AtStart = false;
+            }
+        }
+        catch (Exception ex) 
+        {
+            Console.WriteLine($"Error: {ex.Message}");
         }
     }
 
     [RelayCommand]
     async Task Stop()
     {
-        await EdgeSessionLocation();
-        geolocationService.StopListening();
-        IsRunning = false;
+        try
+        {
+            await EdgeSessionLocation();
+            geolocationService.StopListening();
+            IsRunning = false;
+        } 
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
     }
 }
