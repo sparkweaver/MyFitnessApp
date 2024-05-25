@@ -5,8 +5,6 @@ namespace MyFitnessApp.Services;
 public class GeolocationService
 {
     public event EventHandler<Location>? LocationChangedEvent;
-    private CancellationTokenSource? cancelTokenSource;
-    private bool isChecking;
     private bool isListening;
 
     // Section 1: Manual Location Request
@@ -14,13 +12,9 @@ public class GeolocationService
     {
         try
         {
-            isChecking = true;
-            
-            GeolocationRequest request = new (GeolocationAccuracy.Best, TimeSpan.FromSeconds(5));
-            
-            cancelTokenSource = new CancellationTokenSource();
+            GeolocationRequest request = new (GeolocationAccuracy.Best, TimeSpan.FromSeconds(10));
 
-            Location? location = await Geolocation.Default.GetLocationAsync(request, cancelTokenSource.Token);
+            Location? location = await Geolocation.Default.GetLocationAsync(request, CancellationToken.None);
             
             return location;
         }
@@ -28,20 +22,8 @@ public class GeolocationService
         {
             Console.WriteLine($"Error: {ex.Message}");
         }
-        finally
-        {
-            isChecking = false;
-        }
         
         return null;
-    }
-
-    public void CancelRequest() 
-    { 
-        if (isChecking && cancelTokenSource != null && cancelTokenSource.IsCancellationRequested == false)
-        {
-            cancelTokenSource.Cancel();
-        } 
     }
 
     // Section 2: Event-based Location Updates

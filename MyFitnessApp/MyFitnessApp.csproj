@@ -43,7 +43,7 @@
 		<MauiIcon Include="Resources\AppIcon\runnericon.svg" />
 		
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\runnersplash.svg" Color="#18A8D8"/>
+		<MauiSplashScreen Include="Resources\Splash\runnersplash.svg" Color="#18A8D8" />
 		
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -66,6 +66,9 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.40" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.40" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		
+		<!-- TODO may not be needed-->
+		<PackageReference Include="Microsoft.Maui.Essentials" Version="8.0.40" /> 
 	</ItemGroup>
 
 	<ItemGroup>
