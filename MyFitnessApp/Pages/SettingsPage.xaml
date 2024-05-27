@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyFitnessApp.Pages.SettingsPage"
+             xmlns:viewmodel="clr-namespace:MyFitnessApp.ViewModels"
+             x:DataType="viewmodel:SettingsViewModel"
+             Title="">
+
+
+    <VerticalStackLayout HorizontalOptions="Center"
+                     VerticalOptions="Center"
+                     Spacing="10">
+
+        <Label Text="Settings"
+           Style="{StaticResource Headline}"
+           SemanticProperties.HeadingLevel="Level1"/>
+
+        <Label Text="{Binding WindowSize, StringFormat='Datalimit: {0:N0}'}" 
+               FontSize="Medium"/>
+        <Slider Minimum="10" 
+                Maximum="100" 
+                Value="{Binding WindowSize}" />
+
+        <Label Text="{Binding ThresholdMultiplier, StringFormat='Sensitivity: {0:F2}'}"
+               FontSize="Medium"/>
+        <Slider Minimum="0.5" 
+                Maximum="3.0" 
+                Value="{Binding ThresholdMultiplier}" />
+
+        <Button Text="Save"
+                SemanticProperties.Hint="Resets the walking state to initial values."
+                Command="{Binding SaveSettingsCommand}"/>
+
+        <Button Text="Reset"
+            SemanticProperties.Hint="Resets the walking state to initial values."
+            Command="{Binding ResetStateCommand}"/>
+        
+
+    </VerticalStackLayout>
+</ContentPage>

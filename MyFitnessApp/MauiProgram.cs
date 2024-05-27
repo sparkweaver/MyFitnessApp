@@ -23,6 +23,9 @@ namespace MyFitnessApp
             builder.Services.AddSingleton<DistancePage>();
             builder.Services.AddSingleton<DistanceViewModel>();
 
+            builder.Services.AddTransient<SettingsPage>();
+            builder.Services.AddTransient<SettingsViewModel>();
+
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif

@@ -40,7 +40,7 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\runnericon.svg" />
+		<MauiIcon Include="Resources\AppIcon\runnericon.svg" BaseSize="64,64" />
 		
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\runnersplash.svg" Color="#18A8D8" />
@@ -73,6 +73,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Pages\DistancePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\SettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

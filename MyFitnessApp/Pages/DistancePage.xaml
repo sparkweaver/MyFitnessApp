@@ -27,13 +27,13 @@
                HorizontalTextAlignment="Center"
                IsVisible="{Binding AtStart}"/>
 
-        <Label Text="{Binding Distance}"
-               FontSize="75"
+        <Label Text="{Binding Steps}"
+               FontSize="70"
                HeightRequest="100"
                WidthRequest="350"
                VerticalTextAlignment="Center"
                HorizontalTextAlignment="Center"
-               SemanticProperties.Hint="Displays the distance you have traveled, updated in real-time during your session."
+               SemanticProperties.Hint="Displays the number of steps you have taken, updated in real-time during your session."
                IsVisible="{Binding AtStart, Converter={StaticResource InverseBooleanConverter}}"/>
 
         <Button Text="Start"

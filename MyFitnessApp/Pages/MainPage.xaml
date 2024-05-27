@@ -26,6 +26,10 @@
                 SemanticProperties.Hint="Opens the walking activity page where you can track your walking workouts."
                 Command="{Binding OpenDistancePageCommand}"/>
 
+        <Button Text="Settings"
+                SemanticProperties.Hint="Opens the settings page where you can manage different settings."
+                Command="{Binding OpenSettingsPageCommand}"/>
+
     </VerticalStackLayout>
 
 </ContentPage>

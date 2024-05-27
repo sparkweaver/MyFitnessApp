@@ -1,14 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MyFitnessApp.Services;
-using MyFitnessApp.Utilities;
 
 namespace MyFitnessApp.ViewModels;
 
 public partial class DistanceViewModel : ObservableObject
 {
-    private readonly GeolocationService geolocationService;
-    private readonly DistanceCalculator distanceCalculator;
+    private AccelerometerService accelerometerService = new AccelerometerService();
 
     [ObservableProperty]
     bool atStart;
@@ -19,59 +17,29 @@ public partial class DistanceViewModel : ObservableObject
     [ObservableProperty]
     string distance;
 
+    [ObservableProperty]
+    int steps;
+
     public DistanceViewModel() {
-        distanceCalculator = new DistanceCalculator();
-        geolocationService = new GeolocationService();
-        geolocationService.LocationChangedEvent += OnLocationChanged;
+        accelerometerService.StepDetectedEvent += OnStepDetected;
         AtStart = true;
         IsRunning = false;
         Distance = string.Empty;
+        Steps = 0;
     }
 
-    private void UpdateDistance(Location? locaiton)
+    private void OnStepDetected(object? sender, bool isStep)
     {
-        distanceCalculator.UpdateTotalDistance(locaiton);
-
-        double kilometers = distanceCalculator.GetTotalDistance();
-        double roundedKilometers = Math.Round(kilometers, 2);
-
-        if(kilometers <= 1)
-        {
-            int meters = (int)(kilometers * 1000);
-            Distance = $"{meters} m";
-        }
-        else
-        {
-            Distance = $"{roundedKilometers} km";
-        }
+        Steps++;
     }
-
-    private void OnLocationChanged(object? sender, Location? locaiton)
-    {
-        UpdateDistance(locaiton);
-    }
-
-    private async Task EdgeSessionLocation()
-    {
-        try
-        {
-            Location? locaiton = await geolocationService.GetCurrentLocation();
-            UpdateDistance(locaiton);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"{ex.Message}");
-        }
-    } 
 
     [RelayCommand]
-    async Task Start()
+    void Start()
     {
         try
         {
-            distanceCalculator.Reset();
-            await EdgeSessionLocation();
-            await geolocationService.StartListening();
+            accelerometerService.StartListening();
+            Steps = 0;
             IsRunning = true;
 
             if (AtStart)
@@ -86,12 +54,11 @@ public partial class DistanceViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task Stop()
+    void Stop()
     {
         try
         {
-            await EdgeSessionLocation();
-            geolocationService.StopListening();
+            accelerometerService.StopListening();
             IsRunning = false;
         } 
         catch (Exception ex)

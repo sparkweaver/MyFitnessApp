@@ -9,6 +9,7 @@ namespace MyFitnessApp
             InitializeComponent();
 
             Routing.RegisterRoute(nameof(DistancePage), typeof(DistancePage));
+            Routing.RegisterRoute(nameof(SettingsPage), typeof(SettingsPage));
         }
     }
 }
