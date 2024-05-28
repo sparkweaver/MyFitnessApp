@@ -7,38 +7,46 @@ Please note that the application is provided "as is" without warranty of any kin
 
 # MyFitnessApp
 
-**MyFitnessApp** is a peronsla project desinged to enhance daily fitness routines by providing esential tools tailored for vairuos activities. Starting with basic step counter, the app aims to graidually expand its featurse ot inlcude timers, total distance, perosnalixed user experiencees, and comprehensive functionaltities for diet and workuot management.
+**MyFitnessApp** is a personal project designed to enhance daily fitness routines by providing essential tools tailored for various activities. Starting with the basic step counter, the app aims to gradually expand its features to include timers, total distance, personalized user experiences, and comprehensive functionalities for diet and work management.
 
-A future consideraiotn is the addition of a virtual coach which will offer incuragement for your fitness goals, enahncing the overall user experience.
+A future consideration is the addition of a virtual coach, which will offer encouragement for your fitness goals, enhancing the overall user experience.
 
 ## Features
 
 * **Step Coutner**: Tracks your steps throughout the session.
 
+*Additional features will be introduced in the future.*
+
 ## Installation
 
-Working on it
-
-```bash
-  git clone 
-```
+Currently, the **MyFitnessApp** is in development, and the installation process is currently the debugging and testing version. The app can be installed in a debugger environment on personal devices by developers familiar with mobile app development.
 
 ## How to Use
+#### Starting a walking session:
+1. Open MyfitnessApp
+2. press the **Walking** button to go to the waling page.
+3. Tap **Start** to begin tracking your walk.
 
-Start the app and navigate to the page of interest. 
+### Adjust Settings:
+1. To customize the experience, navigate to the **Settings** page.
+2. Here, you can adjust the window size and sensitivity of the measurement to suit your device.
+
+### Note
+* Ensure you **stop** your current session before making any changes in the Settings. If you start a new session without stopping the previous one, the app might not apply the new settings and instead revert to the old ones.
 
 ## Future Updates
 
-- [] Step counter
+* **Distance Tracker**: Plans to add a feature that measures the total distance.
+* **Timer**: Direct access to a timer in the application.
+* **Profiles**: Should accommodate different users.
+* **Diet Management**: Will include tools to help with managing your diet and tracking calorie and nutrition intake.
+* **Virtual Fitness Coach**: Exploring the possibility of integrating a virtual coach that will provide support.
 
 ## Author
 
 **Johan Lundmark**
 
--[Profile]
--[Email]
--[Website]
+Will fill in this part later.
 
 ## Support
-
-Give a <3 if you like this project
+If you like what you see, consider giving it a start <3. 
