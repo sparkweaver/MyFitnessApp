@@ -1,10 +1,3 @@
-#### Important Disclamer
-*This application is a personal project developed primarily for educational purposes. It currently uses "MyFitnessApp" as a placeholder. Should any issues arise regarding the name or any other aspects of the project, I am prepared to make necessary changes, including removing the project from public access or renaming it.*
-
-*The icon used for this application was initially generated with the help of GPT-4 and edited by me using [Pixlr](https://pixlr.com/). If any concerns are raised about the uses of this image, I will modify the image upon request.*
-
-*Please note that the application is provided "as is" without warranty of any kind, express or implied. I do not assume any responsibility for its use or functionality. Users are encouraged to verify the applicability and safety of the application in their own context.*
-
 # MyFitnessApp
 
 **MyFitnessApp** is a personal project designed to enhance daily fitness routines by providing essential tools tailored for various activities. Starting with the basic step counter, the app aims to gradually expand its features to include timers, total distance, personalized user experiences, and comprehensive functionalities for diet and work management.
@@ -50,3 +43,10 @@ Will fill in this part later.
 
 ## Support
 If you like what you see, consider giving it a start <3. 
+
+#### Important Disclamer
+*This application is a personal project developed primarily for educational purposes. It currently uses "MyFitnessApp" as a placeholder. Should any issues arise regarding the name or any other aspects of the project, I am prepared to make necessary changes, including removing the project from public access or renaming it.*
+
+*The icon used for this application was initially generated with the help of GPT-4 and edited by me using [Pixlr](https://pixlr.com/). If any concerns are raised about the uses of this image, I will modify the image upon request.*
+
+*Please note that the application is provided "as is" without warranty of any kind, express or implied. I do not assume any responsibility for its use or functionality. Users are encouraged to verify the applicability and safety of the application in their own context.*
