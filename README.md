@@ -2,7 +2,7 @@
 
 **MyFitnessApp** is a personal project designed to enhance daily fitness routines by providing essential tools tailored for various activities. Starting with the basic step counter, the app aims to gradually expand its features to include timers, total distance, personalized user experiences, and comprehensive functionalities for diet and work management.
 
-A future consideration is the addition of a virtual coach, which will offer encouragement for your fitness goals, enhancing the overall user experience.
+A future consideration is the addition of a virtual coach, who will offer encouragement for fitness goals and enhance the overall user experience.
 
 ## Features
 
@@ -12,17 +12,22 @@ A future consideration is the addition of a virtual coach, which will offer enco
 
 ## Installation
 
-Currently, the **MyFitnessApp** is in development, and the installation process is currently the debugging and testing version. The app can be installed in a debugger environment on personal devices by developers familiar with mobile app development.
+The **MyFitnessApp** is at the moment in development, and the installation process is currently the debugging and testing version. Developers familiar with mobile app development can install the app on personal devices in a debugger environment.
 
 ## How to Use
 #### Starting a walking session:
 1. Open MyfitnessApp
-2. press the **Walking** button to go to the waling page.
-3. Tap **Start** to begin tracking your walk.
+2. press the **Walking** button to the walking page.
+3. Tap **Start** to begin tracking your session.
+
+*Note: There is a short warmup time before the application starts tracking steps correctly.*
 
 ### Adjust Settings:
-1. To customize the experience, navigate to the **Settings** page.
-2. Here, you can adjust the window size and sensitivity of the measurement to suit your device.
+1. To adjust the sensitivity and adaptativity, navigate to the **Settings** page.
+2. Adjust the respective slider's desired level and tap **Save** to apply the changes.
+3. To revert to the standard settings, tap **Reset**.
+
+*Note: Make sure to stop the current session before making adjustments. This prevents the current settings from overriding any changes you apply*
 
 ### Note
 * Ensure you **stop** your current session before making any changes in the Settings. If you start a new session without stopping the previous one, the app might not apply the new settings and instead revert to the old ones.
