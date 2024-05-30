@@ -46,6 +46,10 @@
                 Command="{Binding StopCommand}"
                 IsVisible="{Binding IsRunning}"/>
 
+        <Button Text="Settings"
+                SemanticProperties.Hint="Opens the settings page where you can manage different settings."
+                Command="{Binding OpenSettingsPageCommand}"/>
+
     </VerticalStackLayout>
 
 </ContentPage>

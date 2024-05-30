@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MyFitnessApp.Pages;
 using MyFitnessApp.Services;
 
 namespace MyFitnessApp.ViewModels;
@@ -31,6 +32,20 @@ public partial class DistanceViewModel : ObservableObject
     private void OnStepDetected(object? sender, bool isStep)
     {
         Steps++;
+    }
+
+    [RelayCommand]
+    async Task OpenSettingsPage()
+    {
+        try
+        {
+            accelerometerService.StopListening();
+            await Shell.Current.GoToAsync(nameof(SettingsPage));
+        }
+        catch (Exception ex)
+        {
+            Console.Write($"Error opening settings page: {ex.Message}");
+        }
     }
 
     [RelayCommand]

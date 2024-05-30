@@ -8,12 +8,20 @@ public class StepDetector
 
     private DateTime lastStepTime = DateTime.MinValue;
     private TimeSpan stepDebounce = TimeSpan.FromSeconds(0.3);
-    
+
     private double lowerBound = 1; 
     
     public StepDetector(StepDetectorState initialState)
     {
         state = initialState ?? new StepDetectorState();
+    }
+
+    public void CalibrateLowerBound()
+    {
+        if (state.RecentMagnitudes.Count > 0)
+        {
+            lowerBound = ComputeBoundary(state.Sum, state.SumSq, state.RecentMagnitudes.Count);
+        }
     }
 
     public bool AddMagnitude(double magnitude)
@@ -36,11 +44,12 @@ public class StepDetector
 
         if (state.RecentMagnitudes.Count >= Math.Min(20, state.WindowSize))
         {
-            double mean = state.Sum / state.WindowSize;
-            double variance = (state.SumSq / state.WindowSize) - (mean * mean);
-            double stdDev = Math.Sqrt(variance);
-
-            double dynamicThreshold = mean + (stdDev * state.ThresholdMultiplier);
+            double dynamicThreshold = ComputeBoundary(
+                state.Sum, 
+                state.SumSq, 
+                state.RecentMagnitudes.Count, 
+                state.ThresholdMultiplier
+                );
 
             if (magnitude > Math.Max(lowerBound, dynamicThreshold))
             {
@@ -52,6 +61,14 @@ public class StepDetector
         return false;
     }
 
+    private static double ComputeBoundary(double sum, double sumSq, int count, double multiplier = 1)
+    {
+        double mean = sum / count;
+        double variance = (sumSq / count) - (mean * mean);
+        double stdDev = Math.Sqrt(variance);
+        return mean + (stdDev * multiplier);
+    }
+
     public StepDetectorState GetState() 
     {
         return state; 
@@ -60,10 +77,5 @@ public class StepDetector
     public void SetState(StepDetectorState newState)
     {
         state = newState;
-    }
-
-    public void SetLowerBound(double newLowerBound)
-    {
-        lowerBound = newLowerBound * 1.05;
     }
 }
