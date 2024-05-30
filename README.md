@@ -1,8 +1,6 @@
 # MyFitnessApp
 
-**MyFitnessApp** is a personal project designed to enhance daily fitness routines by providing essential tools tailored for various activities. Starting with the basic step counter, the app aims to gradually expand its features to include timers, total distance, personalized user experiences, and comprehensive functionalities for diet and work management.
-
-A future consideration is the addition of a virtual coach, who will offer encouragement for fitness goals and enhance the overall user experience.
+**MyFitnessApp** is a personal project designed to enhance my daily fitness routines by providing essential tools tailored for various activities. Starting with the basic step counter, I aim to gradually expand its features to include timers, total distance, personalized user experiences, and comprehensive functionalities for diet and work management. A fun future consideration is the addition of a virtual coach, who will offer encouragement for fitness goals.
 
 ## Features
 
@@ -17,7 +15,7 @@ The **MyFitnessApp** is at the moment in development, and the installation proce
 ## How to Use
 #### Starting a walking session:
 1. Open MyfitnessApp
-2. press the **Walking** button to the walking page.
+2. Press the **Walking** button to navigate to the walking page.
 3. Tap **Start** to begin tracking your session.
 
 *Note: There is a short warmup time before the application starts tracking steps correctly.*
@@ -30,7 +28,7 @@ The **MyFitnessApp** is at the moment in development, and the installation proce
 *Note: Make sure to stop the current session before making adjustments. This prevents the current settings from overriding any changes you apply*
 
 ### Note
-* Ensure you **stop** your current session before making any changes in the Settings. If you start a new session without stopping the previous one, the app might not apply the new settings and instead revert to the old ones.
+In addition to the project, I chose to explore the use of the GitHub milestone feature to better organize and track the progress. This is my first time, so the issues may not be as organized as they could be.
 
 ## Future Updates
 
@@ -47,10 +45,10 @@ The **MyFitnessApp** is at the moment in development, and the installation proce
 Will fill in this part later.
 
 ## Support
-If you like what you see, consider giving it a start <3. 
+Feedback is always appreciated, and If you like what you see, consider giving it a start. 
 
 #### Important Disclamer
-*This application is a personal project developed primarily for educational purposes. It currently uses "MyFitnessApp" as a placeholder. Should any issues arise regarding the name or any other aspects of the project, I am prepared to make necessary changes, including removing the project from public access or renaming it.*
+*This application is a personal project developed primarily for educational purposes, and it is fun. It currently uses "MyFitnessApp" as a placeholder. Should any issues arise regarding the name or any other aspects of the project, I am prepared to make necessary changes, including removing the project from public access or renaming it.*
 
 *The icon used for this application was initially generated with the help of GPT-4 and edited by me using [Pixlr](https://pixlr.com/). If any concerns are raised about the uses of this image, I will modify the image upon request.*
 
