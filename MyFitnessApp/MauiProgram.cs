@@ -20,8 +20,8 @@ namespace MyFitnessApp
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<MainViewModel>();
 
-            builder.Services.AddSingleton<DistancePage>();
-            builder.Services.AddSingleton<DistanceViewModel>();
+            builder.Services.AddSingleton<ExercisePage>();
+            builder.Services.AddSingleton<ExerciseViewModel>();
 
             builder.Services.AddTransient<SettingsPage>();
             builder.Services.AddTransient<SettingsViewModel>();

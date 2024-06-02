@@ -1,13 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MyFitnessApp.Managers;
 using MyFitnessApp.Pages;
-using MyFitnessApp.Services;
 
 namespace MyFitnessApp.ViewModels;
 
-public partial class DistanceViewModel : ObservableObject
+public partial class ExerciseViewModel : ObservableObject
 {
-    private AccelerometerService accelerometerService = new AccelerometerService();
+    private ExerciseManager manager = new();
 
     [ObservableProperty]
     bool atStart;
@@ -21,8 +21,8 @@ public partial class DistanceViewModel : ObservableObject
     [ObservableProperty]
     int steps;
 
-    public DistanceViewModel() {
-        accelerometerService.StepDetectedEvent += OnStepDetected;
+    public ExerciseViewModel() {
+        manager.StepDetectedEvent += OnStepDetected;
         AtStart = true;
         IsRunning = false;
         Distance = string.Empty;
@@ -39,7 +39,7 @@ public partial class DistanceViewModel : ObservableObject
     {
         try
         {
-            accelerometerService.StopListening();
+            manager.StopExercise();
             await Shell.Current.GoToAsync(nameof(SettingsPage));
         }
         catch (Exception ex)
@@ -53,7 +53,7 @@ public partial class DistanceViewModel : ObservableObject
     {
         try
         {
-            accelerometerService.StartListening();
+            manager.StartExercise();
             Steps = 0;
             IsRunning = true;
 
@@ -73,7 +73,7 @@ public partial class DistanceViewModel : ObservableObject
     {
         try
         {
-            accelerometerService.StopListening();
+            manager.StopExercise();
             IsRunning = false;
         } 
         catch (Exception ex)

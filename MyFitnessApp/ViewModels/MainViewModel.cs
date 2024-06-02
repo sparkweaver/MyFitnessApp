@@ -7,11 +7,11 @@ namespace MyFitnessApp.ViewModels;
 public partial class MainViewModel : ObservableObject
 {
     [RelayCommand]
-    async Task OpenDistancePage()
+    async Task OpenExercisePage()
     {
         try 
         {
-            await Shell.Current.GoToAsync(nameof(DistancePage));
+            await Shell.Current.GoToAsync(nameof(ExercisePage));
         } 
         catch (Exception ex) 
         {
