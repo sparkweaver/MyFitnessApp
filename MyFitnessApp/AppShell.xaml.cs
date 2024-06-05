@@ -10,6 +10,7 @@ namespace MyFitnessApp
 
             Routing.RegisterRoute(nameof(ExercisePage), typeof(ExercisePage));
             Routing.RegisterRoute(nameof(SettingsPage), typeof(SettingsPage));
+            Routing.RegisterRoute(nameof(DietPage), typeof(DietPage));
         }
     }
 }

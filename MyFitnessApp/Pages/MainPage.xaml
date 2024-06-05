@@ -26,6 +26,10 @@
                 SemanticProperties.Hint="Opens the exercise page where you can track your workout."
                 Command="{Binding OpenExercisePageCommand}"/>
 
+        <Button Text="Diet"
+                SemanticProperties.Hint="Opens the exercise page where you can track your workout."
+                Command="{Binding OpenDietPageCommand}"/>
+
     </VerticalStackLayout>
 
 </ContentPage>

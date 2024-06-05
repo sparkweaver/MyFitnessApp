@@ -1,13 +1,22 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MyFitnessApp.Managers;
+using MyFitnessApp.Models;
 using MyFitnessApp.Pages;
+using MyFitnessApp.Services;
+using MyFitnessApp.Utilities;
+using System.Diagnostics;
+using System.Text.Json;
 
 namespace MyFitnessApp.ViewModels;
 
 public partial class ExerciseViewModel : ObservableObject
 {
-    private ExerciseManager manager = new();
+    private AccelerometerService accelerometerService = new();
+    private StateService stateService = new();
+    private StepDetectorState state;
+    private StepDetector detector;
+    private ExerciseManager manager;
 
     [ObservableProperty]
     bool atStart;
@@ -22,11 +31,35 @@ public partial class ExerciseViewModel : ObservableObject
     int steps;
 
     public ExerciseViewModel() {
-        manager.StepDetectedEvent += OnStepDetected;
+        state = stateService.LoadState();
+        detector = new StepDetector(state);
+        manager = new ExerciseManager(accelerometerService, detector);
+        manager.StepDetected += OnStepDetected;
         AtStart = true;
         IsRunning = false;
         Distance = string.Empty;
         Steps = 0;
+    }
+
+    private static StepDetectorState LoadDetectorState()
+    {
+        try
+        {
+            string serializedState = Preferences.Get("StepDetectorState", "");
+            if (!string.IsNullOrEmpty(serializedState))
+            {
+                return JsonSerializer.Deserialize<StepDetectorState>(serializedState) ?? new StepDetectorState();
+            }
+            else
+            {
+                return new StepDetectorState();
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.WriteLine($"Error loading state: {e.Message}");
+            return new StepDetectorState();
+        }
     }
 
     private void OnStepDetected(object? sender, bool isStep)
@@ -40,11 +73,17 @@ public partial class ExerciseViewModel : ObservableObject
         try
         {
             manager.StopExercise();
-            await Shell.Current.GoToAsync(nameof(SettingsPage));
+
+            var parameter = new Dictionary<string, object> 
+            {
+                {"StepDetectorState", state }
+            };
+
+            await Shell.Current.GoToAsync(nameof(SettingsPage), parameter);
         }
         catch (Exception ex)
         {
-            Console.Write($"Error opening settings page: {ex.Message}");
+            Console.WriteLine($"Error opening settings page: {ex.Message}");
         }
     }
 
@@ -74,6 +113,7 @@ public partial class ExerciseViewModel : ObservableObject
         try
         {
             manager.StopExercise();
+            stateService.SaveState(state);
             IsRunning = false;
         } 
         catch (Exception ex)
