@@ -1,5 +1,7 @@
 # MyFitnessApp
 
+**NOTE**: I will leave this project public but put it on the shelf and work on another project of higher importance. The step counter is mostly done and needs a small adjustment to be completed. The structure will be changed, and then I will simply make it a step counter in the future.
+
 **MyFitnessApp** is a personal project designed to enhance my daily fitness routines by providing essential tools tailored for various activities. Starting with the basic step counter, I aim to gradually expand its features to include timers, total distance, personalized user experiences, and comprehensive functionalities for diet and work management. A fun future consideration is the addition of a virtual coach, who will offer encouragement for fitness goals.
 
 ## Features
