@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyFitnessApp.Pages.DistancePage"
+             x:Class="MyFitnessApp.Pages.ExercisePage"
              xmlns:viewmodel="clr-namespace:MyFitnessApp.ViewModels"
              xmlns:utilities="clr-namespace:MyFitnessApp.Utilities"
-             x:DataType="viewmodel:DistanceViewModel"
+             x:DataType="viewmodel:ExerciseViewModel"
              Title="">
 
     <ContentPage.Resources>
@@ -45,6 +45,10 @@
                 SemanticProperties.Hint="Stop tracking your movement."
                 Command="{Binding StopCommand}"
                 IsVisible="{Binding IsRunning}"/>
+
+        <Button Text="Settings"
+                SemanticProperties.Hint="Opens the settings page where you can manage different settings."
+                Command="{Binding OpenSettingsPageCommand}"/>
 
     </VerticalStackLayout>
 

@@ -6,29 +6,37 @@ using System.Windows.Input;
 
 namespace MyFitnessApp.ViewModels;
 
-public class SettingsViewModel : INotifyPropertyChanged
+public class SettingsViewModel : IQueryAttributable, INotifyPropertyChanged
 {
-    private StepDetectorState detectorState;
-
-    public StepDetectorState DetectorState
+    private StepDetectorState? detectorState;
+    public StepDetectorState? DetectorState 
     {
-        get => detectorState;
-        set 
+        get 
         {
+            return detectorState;
+        }
+        set 
+        { 
             if(detectorState != value)
             {
                 detectorState = value;
                 OnPropertyChanged(nameof(DetectorState));
+                OnPropertyChanged(nameof(WindowSize));
+                OnPropertyChanged(nameof(ThresholdMultiplier));
             }
         }
     }
 
-    public int WindowSize 
+    public int WindowSize
     {
-        get => DetectorState.WindowSize;
-        set 
+        get 
         {
-            if (DetectorState.WindowSize != value)
+            if (detectorState == null) { return 0; }
+            return detectorState.WindowSize;
+        }
+        set
+        {
+            if (DetectorState != null && DetectorState.WindowSize != value)
             {
                 DetectorState.WindowSize = value;
                 OnPropertyChanged(nameof(WindowSize));
@@ -38,10 +46,14 @@ public class SettingsViewModel : INotifyPropertyChanged
 
     public double ThresholdMultiplier
     {
-        get => DetectorState.ThresholdMultiplier;
+        get
+        {
+            if (detectorState == null) { return 0; }
+            return detectorState.ThresholdMultiplier;
+        }
         set
         {
-            if(DetectorState.ThresholdMultiplier != value)
+            if (DetectorState != null && DetectorState.ThresholdMultiplier != value)
             {
                 DetectorState.ThresholdMultiplier = value;
                 OnPropertyChanged(nameof(ThresholdMultiplier));
@@ -49,50 +61,19 @@ public class SettingsViewModel : INotifyPropertyChanged
         }
     }
 
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        DetectorState = query["StepDetectorState"] as StepDetectorState;
+    }
+
     public event PropertyChangedEventHandler? PropertyChanged;
-    public ICommand SaveSettingsCommand { get; }
-    public ICommand ResetStateCommand { get; }
 
     protected virtual void OnPropertyChanged(string propertyName)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    public SettingsViewModel() 
+    protected override void OnDisappearing() 
     {
-        SaveSettingsCommand = new Command(SaveSettings);
-        ResetStateCommand = new Command(ResetState);
-        LoadDetectorState();
-    }
-
-    private void LoadDetectorState()
-    {
-        string serializedState = Preferences.Get("StepDetectorState", "");
-        if (!string.IsNullOrEmpty(serializedState))
-        {
-            DetectorState = JsonSerializer.Deserialize<StepDetectorState>(serializedState) ?? new StepDetectorState();
-        }
-        else
-        {
-            DetectorState = new StepDetectorState();
-        }
-    }
-
-    public void SaveSettings()
-    {
-        try
-        {
-            string serializedState = JsonSerializer.Serialize(DetectorState);
-            Preferences.Set("StepDetectorState", serializedState);
-        }
-        catch (Exception e) 
-        {
-            Debug.WriteLine($"Error saving state: {e.Message}");
-        }
-    }
-
-    public void ResetState()
-    {
-        Preferences.Remove("StepDetectorState");
     }
 }

@@ -1,35 +1,41 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using MyFitnessApp.Pages;
-using System.Diagnostics;
+﻿using MyFitnessApp.Pages;
+using System.ComponentModel;
+using System.Windows.Input;
 
 namespace MyFitnessApp.ViewModels;
 
-public partial class MainViewModel : ObservableObject
+public class MainViewModel
 {
-    [RelayCommand]
-    async Task OpenDistancePage()
+    public ICommand OpenExercisePageCommand { private set;  get; }
+    public ICommand OpenDietPageCommand { private set; get; }
+
+    public MainViewModel()
     {
-        try 
+        OpenExercisePageCommand = new Command(async () => await OpenExercisePage());
+        OpenDietPageCommand = new Command(async () => await OpenDietPage());
+    }
+
+    private async Task OpenExercisePage()
+    {
+        try
         {
-            await Shell.Current.GoToAsync(nameof(DistancePage));
-        } 
-        catch (Exception ex) 
+            await Shell.Current.GoToAsync(nameof(ExercisePage));
+        }
+        catch (Exception ex)
         {
             Console.WriteLine($"Error: {ex.Message}");
         }
     }
 
-    [RelayCommand]
-    async Task OpenSettingsPage()
+    private async Task OpenDietPage()
     {
         try
         {
-            await Shell.Current.GoToAsync(nameof(SettingsPage));
+            await Shell.Current.GoToAsync(nameof(DietPage));
         }
         catch (Exception ex)
         {
-            Console.Write($"Error opening settings page: {ex.Message}");
+            Console.WriteLine($"Error: {ex.Message}");
         }
     }
 }

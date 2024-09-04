@@ -2,9 +2,9 @@ using MyFitnessApp.ViewModels;
 
 namespace MyFitnessApp.Pages;
 
-public partial class DistancePage : ContentPage
+public partial class ExercisePage : ContentPage
 {
-    public DistancePage(DistanceViewModel vm)
+    public ExercisePage(ExerciseViewModel vm)
 	{
 		InitializeComponent();
 

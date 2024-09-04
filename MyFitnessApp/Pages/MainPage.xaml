@@ -22,13 +22,13 @@
                Style="{StaticResource Headline}"
                SemanticProperties.HeadingLevel="Level1"/>
 
-        <Button Text="Walking"
-                SemanticProperties.Hint="Opens the walking activity page where you can track your walking workouts."
-                Command="{Binding OpenDistancePageCommand}"/>
+        <Button Text="Exercise"
+                SemanticProperties.Hint="Opens the exercise page where you can track your workout."
+                Command="{Binding OpenExercisePageCommand}"/>
 
-        <Button Text="Settings"
-                SemanticProperties.Hint="Opens the settings page where you can manage different settings."
-                Command="{Binding OpenSettingsPageCommand}"/>
+        <Button Text="Diet"
+                SemanticProperties.Hint="Opens the exercise page where you can track your workout."
+                Command="{Binding OpenDietPageCommand}"/>
 
     </VerticalStackLayout>
 

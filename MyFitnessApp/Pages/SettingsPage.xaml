@@ -15,26 +15,19 @@
            Style="{StaticResource Headline}"
            SemanticProperties.HeadingLevel="Level1"/>
 
-        <Label Text="{Binding WindowSize, StringFormat='Datalimit: {0:N0}'}" 
-               FontSize="Medium"/>
+        <Label Text="{Binding WindowSize, StringFormat='Datalimit: {0:N0}'}"/>
         <Slider Minimum="10" 
-                Maximum="100" 
-                Value="{Binding WindowSize}" />
+                Maximum="100"
+                Value="{Binding WindowSize, Mode=TwoWay}"/>
 
-        <Label Text="{Binding ThresholdMultiplier, StringFormat='Sensitivity: {0:F2}'}"
-               FontSize="Medium"/>
+        <Label Text="{Binding ThresholdMultiplier, StringFormat='Sensitivity: {0:F2}'}"/>
         <Slider Minimum="0.5" 
                 Maximum="3.0" 
-                Value="{Binding ThresholdMultiplier}" />
-
-        <Button Text="Save"
-                SemanticProperties.Hint="Resets the walking state to initial values."
-                Command="{Binding SaveSettingsCommand}"/>
-
+                Value="{Binding ThresholdMultiplier, Mode=TwoWay}"/>
+               
         <Button Text="Reset"
-            SemanticProperties.Hint="Resets the walking state to initial values."
-            Command="{Binding ResetStateCommand}"/>
-        
+            SemanticProperties.Hint="Resets the walking state to initial values."/>
+
 
     </VerticalStackLayout>
 </ContentPage>
